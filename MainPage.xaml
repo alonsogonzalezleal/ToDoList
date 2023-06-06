@@ -1,0 +1,44 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ToDoList.MainPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <LinearGradientBrush x:Key="BackgroundBrush" StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Offset="0" Color="#040a0e" />
+                <GradientStop Offset="0.2" Color="#041b25" />
+                <GradientStop Offset="0.4" Color="#044758" />
+                <GradientStop Offset="0.6" Color="#045474" />
+                <GradientStop Offset="1" Color="#096b83" />
+            </LinearGradientBrush>
+        </ResourceDictionary>
+        <Color x:Key="SelectionColor">#000</Color>
+        <Color x:Key="LightFont">#f1f1f1f1</Color>
+        <Color x:Key="DarkFont">#222</Color>
+        <Color x:Key="PlaceholderColor">#999</Color>
+    </ContentPage.Resources>
+
+    <StackLayout Background="{StaticResource BackgroundBrush}">
+            <Image Source="task_icon.png" WidthRequest="100" Margin="20"></Image>
+            <Entry x:Name="taskEntry" Placeholder="Nombre de la tarea" Margin="20,20,20,0" />
+        <Button Text="Agregar" BackgroundColor="#0b7487" TextColor="{x:StaticResource LightFont}" Margin="20,10,20,20" Clicked="OnAddTaskClicked" />
+            <ListView x:Name="taskListView" ItemsSource="{Binding Tasks}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Margin="20,10,20,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <CheckBox IsChecked="{Binding IsCompleted}" CheckedChanged="OnTaskCompletedChanged" />
+                                <Label Text="{Binding Description}" TextColor="{x:StaticResource LightFont}" VerticalOptions="Center" Grid.Column="1" />
+                            <Button Text="X" Clicked="OnDeleteTaskClicked" BorderWidth="0" BackgroundColor="#e00000" TextColor="{x:StaticResource LightFont}" Grid.Column="2" HorizontalOptions="End" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+    </StackLayout>
+</ContentPage>
